@@ -1,0 +1,9 @@
+2009-06-26	Michel Boucey <michel.boucey@gmail.com>
+
+	- Version 0.1 released.
+
+2009-09-11	Michel Boucey <michel.boucey@gmail.com>
+
+	- Version 0.1.1 released.
+	- Fixed three bugs in IPv6 address validation.
+	- Added a test written in Perl.
