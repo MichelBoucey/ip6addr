@@ -11,10 +11,9 @@ configure: clean
 build: clean configure
 	$(RHS) build
 
-
 .PHONY: test
 test:
-	./test/test.pl
+	perl ./test/test.pl
 
 install: clean configure build
 	$(RHS) install

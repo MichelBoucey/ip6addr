@@ -1,9 +1,20 @@
-2009-06-26	Michel Boucey <michel.boucey@gmail.com>
+2010-08-09	Michel Boucey <michel.boucey@gmail.com>
 
-	- Version 0.1 released.
-
+	- Version 0.2 released.
+	- The command-line tool 'ip6addr' is renamed ip6addrval.
+	  This tool now validates CIDR suffix if exists and
+          outputs IPv6 adresses with CIDR prefixes cutted off.
+	- The command-line tool 'ip6addrgen' is added.
+          This tool generates random IPv6 adresses.
+          Two options : -n to provide a count of IPv6 adresses to output,
+          -p to provide an uncompressed prefix to apply to each outputted address.
+	
 2009-09-11	Michel Boucey <michel.boucey@gmail.com>
 
 	- Version 0.1.1 released.
 	- Fixed three bugs in IPv6 address validation.
 	- Added a test written in Perl.
+
+2009-06-26	Michel Boucey <michel.boucey@gmail.com>
+
+	- Version 0.1 released.
