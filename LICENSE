@@ -1,4 +1,8 @@
-ip6addr provides command-line tools to filters parsed IPv6 Addresses against RFC 4291 and to generate random IPv6 addresses
+ip6addr provides command-line tools (written in Haskell) to deal with text representation of IPv6 Addresses:
+
+- ip6addrcan parses and canonizes IPv6 addresses against RFC 4291 and RFC 5952.
+
+- ip6addrgen generates random IPv6 addresses.
 
 Copyright (c) 2009-2010, Michel Boucey All rights reserved.
 

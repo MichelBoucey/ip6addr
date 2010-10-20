@@ -6,14 +6,13 @@ clean:
 	$(RHS) clean
 
 configure: clean
-	$(RHS) configure
+	$(RHS) configure 
 
 build: clean configure
 	$(RHS) build
 
-.PHONY: test
-test:
-	perl ./test/test.pl
-
-install: clean configure build
+install: build
 	$(RHS) install
+
+sdist: build
+	$(RHS) sdist

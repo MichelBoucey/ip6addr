@@ -1,13 +1,25 @@
+2010-11-20	Michel Boucey <michel.boucey@gmail.com>
+
+	- Version 0.3 released.
+	- The command-line tool 'ip6addrval' is renamed (for the
+	  last time) 'ip6addrcan'. This tool now outputs rewrited
+	  valid IPv6 addresses canonized in conformation with
+	  RFC 5952, which updates RFC 4291.
+	- ip6addrgen is not updated yet from RFC 4291 to RFC 5952.
+	  Outputted adresses from ip6addrgen have to be pipelined
+	  through ip6addrcan.
+
 2010-08-09	Michel Boucey <michel.boucey@gmail.com>
 
 	- Version 0.2 released.
-	- The command-line tool 'ip6addr' is renamed ip6addrval.
+	- The command-line tool 'ip6addr' is renamed 'ip6addrval'.
 	  This tool now validates CIDR suffix if exists and
           outputs IPv6 adresses with CIDR prefixes cutted off.
 	- The command-line tool 'ip6addrgen' is added.
           This tool generates random IPv6 adresses.
-          Two options : -n to provide a count of IPv6 adresses to output,
-          -p to provide an uncompressed prefix to apply to each outputted address.
+          Two options : -n to provide a count of IPv6 adresses
+	  to output, -p to provide an uncompressed prefix to apply
+	  to each outputted address.
 	
 2009-09-11	Michel Boucey <michel.boucey@gmail.com>
 
