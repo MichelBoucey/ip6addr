@@ -41,7 +41,7 @@ evalInputsErr (i:is) =
         Nothing -> hPutStrLn stderr i >> evalInputsErr is
     where a = removeCidrSuffix i
 			   
-version = "ip6addrcan version 0.3"
+version = "ip6addrcan version 0.3.1"
 
 help   = "Usage: ip6addrcan [-v|-h] | [-e] [address ...]\n"
 

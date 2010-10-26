@@ -1,9 +1,11 @@
 ip6addr provides command-line tools (written in Haskell) to deal with
 text representation of IPv6 Addresses :
 
-- ip6addrcan parses and canonizes IPv6 addresses against RFC 4291 and
-  RFC 5952. IPv6 adresses already compressed are recomputed.
+- 'ip6addrcan' parses and canonizes IPv6 addresses against RFC 4291 and
+  RFC 5952. IPv6 adresses already compressed are recomputed. Embedded
+  IPv4 adress is rewritten into hexadecimal digits, except for well-
+  known IPv6 prefixes.
 
-- ip6addrgen generates random IPv6 addresses.
+- 'ip6addrgen' generates random IPv6 addresses.
 
 Copyright (c) 2009-2010, Michel Boucey All rights reserved
