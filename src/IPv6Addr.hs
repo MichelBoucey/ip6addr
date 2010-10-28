@@ -1,7 +1,7 @@
 module IPv6Addr where
 
 import Data.Char (intToDigit,isDigit,isHexDigit,toLower)
-import Data.List (group,groupBy,intercalate,intersperse,elemIndex)
+import Data.List -- (group,groupBy,intercalate,intersperse,elemIndex)
 import Data.Function (on)
 import Data.Maybe
 import Numeric
@@ -156,25 +156,28 @@ maybeIPv6Addr s =
 -- 	ISATAP address like "fe80::5efe:1.2.3.4"
 ipv4AddrToHex :: [Maybe IPv6AddrToken] -> [Maybe IPv6AddrToken]
 ipv4AddrToHex [Just DoubleColon,Just (IPv4Addr a)] =
-    [Just DoubleColon,Just Colon,Just (IPv4Addr a)]
+    [Just DoubleColon,Just (IPv4Addr a)]
 ipv4AddrToHex [Just DoubleColon,Just (SixteenBits "ffff"),Just Colon,Just (IPv4Addr a)] =
     [Just DoubleColon,Just (SixteenBits "ffff"),Just Colon,Just (IPv4Addr a)]
 ipv4AddrToHex [Just DoubleColon,Just (SixteenBits "ffff"),Just Colon,Just AllZeros,Just Colon,Just (IPv4Addr a)] =
     [Just DoubleColon,Just (SixteenBits "ffff"),Just Colon,Just AllZeros,Just Colon,Just (IPv4Addr a)]
 ipv4AddrToHex [Just (SixteenBits "64"),Just Colon,Just (SixteenBits "ff9b"),Just DoubleColon,Just (IPv4Addr a)] =
     [Just (SixteenBits "64"),Just Colon,Just (SixteenBits "ff9b"),Just DoubleColon,Just (IPv4Addr a)]
-ipv4AddrToHex [Just (SixteenBits "fe80"),Just DoubleColon,Just (SixteenBits "5efe"),Just Colon,Just (IPv4Addr a)] =
-    [Just (SixteenBits "fe80"),Just DoubleColon,Just (SixteenBits "5efe"),Just Colon,Just (IPv4Addr a)]
 ipv4AddrToHex ts =
-    do
-        let t = last ts
-        case t of
-            Just (IPv4Addr a) -> do
-                let m = map (\x -> showIntAtBase 16 intToDigit (read x::Int) "")
-                        $ filter (/= ".") (a `tokenizedBy` '.')
-                init ts ++ [Just (SixteenBits ((!!) m 0 ++ addZero((!!) m 1))),Just Colon,Just (SixteenBits ((!!) m 2 ++ addZero((!!) m 3)))]
-                    where
-                        addZero s = if length s < 2 then '0':s else s
+        case last ts of
+            Just (IPv4Addr a) ->
+                do
+                    let its = init ts
+                    if [Just (SixteenBits "200"),Just Colon,Just (SixteenBits "5efe"),Just Colon] `isSuffixOf` its
+                       || [Just AllZeros,Just Colon,Just (SixteenBits "5efe"),Just Colon] `isSuffixOf` its
+                       || [Just DoubleColon,Just (SixteenBits "5efe"),Just Colon] `isSuffixOf` its
+                        then ts
+                        else do
+                            let m = map (\x -> showIntAtBase 16 intToDigit (read x::Int) "")
+                                    $ filter (/= ".") (a `tokenizedBy` '.')
+                            its ++ [Just (SixteenBits ((!!) m 0 ++ addZero((!!) m 1))),Just Colon,Just (SixteenBits ((!!) m 2 ++ addZero((!!) m 3)))]
+                                where
+                                    addZero s = if length s < 2 then '0':s else s
             otherwise -> ts
 
 expendDoubleColon :: [Maybe IPv6AddrToken] -> [Maybe IPv6AddrToken]

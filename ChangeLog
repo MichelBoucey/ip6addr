@@ -1,3 +1,10 @@
+2010-10-28      Michel Boucey <michel.boucey@gmail.com>
+
+	- Version 0.3.2 released.
+	- Fixed a mis pattern matching in version 0.3.1.
+	- Better pattern matching ISATAP adresses to keep
+	  their IPv4 dotted representation in IPv6 addresses.
+
 2010-10-26      Michel Boucey <michel.boucey@gmail.com>
 
 	- Version 0.3.1 released.

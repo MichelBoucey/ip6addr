@@ -105,7 +105,7 @@ parseArgs args =
         ([Help],_,_) -> putStrLn (usageInfo help options) >> exit
         (_,_,_) -> putStrLn (usageInfo help options) >> exit
 
-version = "ip6addrgen version 0.3.1"
+version = "ip6addrgen version 0.3.2"
 
 help = "Usage: ip6addrgen [-v|-h] | [-n] [-p]\n"
 
