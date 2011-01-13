@@ -1,7 +1,7 @@
 module IPv6Addr where
 
 import Data.Char (intToDigit,isDigit,isHexDigit,toLower)
-import Data.List -- (group,groupBy,intercalate,intersperse,elemIndex)
+import Data.List (group,groupBy,intercalate,intersperse,elemIndex,isSuffixOf)
 import Data.Function (on)
 import Data.Maybe
 import Numeric
@@ -141,7 +141,7 @@ maybeIPv6Addr s =
             then
                 (if Just DoubleColon `notElem` ts
                     then Just $ ipv6AddrToString (ipv4AddrToHex $ replaceTheLongestZerosRun ts)
-                    else Just $ ipv6AddrToString (ipv4AddrToHex $ replaceTheLongestZerosRun (expendDoubleColon ts)))
+                    else Just $ ipv6AddrToString (ipv4AddrToHex $ replaceTheLongestZerosRun (expandDoubleColon ts)))
             else Nothing
 
 -- The embedded IPv4 address have to be rewritten to output a pure IPv6 Address
@@ -180,8 +180,8 @@ ipv4AddrToHex ts =
                                     addZero s = if length s < 2 then '0':s else s
             otherwise -> ts
 
-expendDoubleColon :: [Maybe IPv6AddrToken] -> [Maybe IPv6AddrToken]
-expendDoubleColon mit = do
+expandDoubleColon :: [Maybe IPv6AddrToken] -> [Maybe IPv6AddrToken]
+expandDoubleColon mit = do
     let s = splitAt (fromJust $ elemIndex (Just DoubleColon) mit) mit
     let fsts = fst s
     let snds = if length(snd s) >= 1 then tail(snd s) else []

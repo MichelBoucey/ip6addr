@@ -1,3 +1,8 @@
+2011-01-13	Michel Boucey <michel.boucey@gmail.com>
+	- Version 0.3.3 released.
+	- ip6addrgen now deals with leading zeros in 16bits
+          token.
+
 2010-10-28      Michel Boucey <michel.boucey@gmail.com>
 
 	- Version 0.3.2 released.

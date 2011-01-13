@@ -33,7 +33,7 @@ prefixRewrite :: String -> IO ()
 prefixRewrite s =
     do
         t <- readLast16bitsTokenOfPrefix s
-        putStr $ map toLower $fst t
+        putStr $ dropWhile (=='0') $ map toLower $fst t
         g <- genNhex $ snd t
         putStr g
 				
@@ -49,7 +49,7 @@ genNhex :: Int -> IO String
 genNhex n = replicateM n genRandomHex
 
 n16bitsToken :: Int -> IO ()
-n16bitsToken n = replicateM n (genNhex 4) >>= putStr . intercalate ":"
+n16bitsToken n = replicateM n (fmap (dropWhile (=='0')) $ genNhex 4) >>= putStr . intercalate ":"
 
 count16bitsToken :: String -> Int
 count16bitsToken = foldl (\x y -> if y == '6' then x+1 else x) 0
@@ -105,7 +105,7 @@ parseArgs args =
         ([Help],_,_) -> putStrLn (usageInfo help options) >> exit
         (_,_,_) -> putStrLn (usageInfo help options) >> exit
 
-version = "ip6addrgen version 0.3.2"
+version = "ip6addrgen version 0.3.3"
 
 help = "Usage: ip6addrgen [-v|-h] | [-n] [-p]\n"
 
