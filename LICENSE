@@ -4,7 +4,7 @@ ip6addr provides command-line tools (written in Haskell) to deal with text repre
 
 - ip6addrgen generates random IPv6 addresses.
 
-Copyright (c) 2009-2010, Michel Boucey All rights reserved.
+Copyright (c) 2009-2011, Michel Boucey All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
