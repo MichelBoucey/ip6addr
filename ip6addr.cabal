@@ -17,7 +17,7 @@ Source-Repository head
   Location: https://github.com/MichelBoucey/ip6addr.git
 
 executable ip6addr
-  GHC-Options: -O2 -Wall -Werror
+  GHC-Options: -O2 -Wall
   main-is:             Main.hs
   other-extensions:    DeriveDataTypeable, OverloadedStrings
   build-depends:       base >=4.7 && <4.8, cmdargs,IPv6Addr >= 0.5, text >= 1.2
