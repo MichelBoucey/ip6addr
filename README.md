@@ -21,7 +21,7 @@ ca18::654a:57ab:2ed7
 5b8b:8ab4::f0b8  
 f191:ecc9:8193:8a2:104c:fec1:0:8c4d  
 af3b:3ffd:8302:6c56::8623:26
-&gt; ip6addr -o random -q 3 -p 1234:abcd::
-1234:abcd::cda6:cf2a:bb1d:d70b
-1234:abcd::362c:8295:f546:a43a
-1234:abcd::1121:ca16:ab5:688a
+&gt; ip6addr -o random -q 3 -p 1234:1ab2::
+1234:1a2b::cda6:cf2a:bb1d:d70b
+1234:1a2b::362c:8295:f546:a43a
+1234:1a2b::1121:ca16:ab5:688a
