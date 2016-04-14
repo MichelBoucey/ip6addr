@@ -1,25 +1,17 @@
--- -----------------------------------------------------------------------------
---
--- Copyright  : (c) Michel Boucey 2015
--- License    : BSD-Style
--- Maintainer : michel.boucey@gmail.com
---
--- Commandline tool to generate IPv6 address text representations
---
--- -----------------------------------------------------------------------------
+{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE OverloadedStrings  #-}
 
-{-# LANGUAGE DeriveDataTypeable,OverloadedStrings #-}
+import           Control.Monad          (replicateM_)
+import           Data.Monoid            ((<>))
+import qualified Data.Text              as T
+import qualified Data.Text.IO           as TIO (hPutStrLn, putStrLn)
+import           System.Console.CmdArgs
+import           System.Exit
+import           System.IO              (stderr)
 
-import Control.Monad (replicateM_)
-import Data.Text as T (append,pack)
-import Data.Text.IO as TIO (putStrLn,hPutStrLn)
-import System.Console.CmdArgs
-import System.Exit
-import System.IO (stderr)
+import           Text.IPv6Addr
 
-import Text.IPv6Addr
-
-data Input =Input
+data Input = Input
     { output   :: String
     , address  :: String
     , quantity :: Int
@@ -31,15 +23,14 @@ ip6addrInput = Input
     { address = ""
       &= typ " <IPv6 address>"
     , output = "canonical"
-      &= typ " [pure|canonical|full|arpa|random]"
-      &= help "(default=canonical)"
+      &= typ " [canonical|pure|full|arpa|unc|random]" &= help "Default : canonical (RFC 5952)"
     , quantity = 1
       &= help "Amount of random addresses to generate"
       &= typ " <Integer>"
     , prefix = ""
       &= typ " <Prefix>"
       &= help "Set a prefix for random addresses generation"
-    } &= summary "ip6addr version 0.5.0.1 (C) Michel Boucey 2015"
+    } &= summary "ip6addr version 0.5.1.0 (C) Michel Boucey 2015-2016"
       &= program "ip6addr"
       &= helpArg [name "h"]
       &= details [ "Examples:"
@@ -59,10 +50,11 @@ main = do
             let m = address a
             case output a of
                 "canonical" -> out maybeIPv6Addr m fromIPv6Addr
-                "full"      -> out maybeFullIPv6Addr m fromIPv6Addr
-                "arpa"      -> out maybePureIPv6Addr m toIP6ARPA
                 "pure"      -> out maybePureIPv6Addr m fromIPv6Addr
-                _           -> hPutStrLn stderr "See help" >> exitFailure
+                "full"      -> out maybeFullIPv6Addr m fromIPv6Addr
+                "arpa"      -> out maybeIP6ARPA m id
+                "unc"       -> out maybeUNC m id
+                _           -> TIO.hPutStrLn stderr "See help" >> exitFailure
   where
     putRandAddr p = do
         r <- randIPv6AddrWithPrefix $
@@ -75,8 +67,22 @@ main = do
             then do
                 let p = T.pack i
                 case t p of
-                    Nothing -> hPutStrLn stderr 
-                        ("'" `T.append` p `T.append` "' is not an IPv6 address")
+                    Nothing -> TIO.hPutStrLn stderr
+                        ("'" <> p <> "' is not an IPv6 address")
                         >> exitFailure
                     Just a  -> TIO.putStrLn (o a) >> exitSuccess
             else Prelude.putStrLn "See help" >> exitFailure
+    maybeUNC t =
+        maybe Nothing
+              (\a -> Just $ (T.concatMap trans $ fromIPv6Addr a) <> ".ipv6-literal.net")
+              (maybePureIPv6Addr t)
+      where
+        trans ':' = "-"
+        trans c   = T.pack [c]
+    maybeIP6ARPA t =
+        maybe Nothing
+              (\a -> Just $ T.reverse (T.concatMap trans $ fromIPv6Addr a) <> "IP6.ARPA.")
+              (maybeFullIPv6Addr t)
+      where
+        trans ':' = T.empty
+        trans c   = "." <> T.pack [c]

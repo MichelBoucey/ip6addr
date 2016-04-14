@@ -4,6 +4,7 @@
 * Pure, i.e. rewriting IPv4 address if present
 * Full length
 * Reverse lookup domain name, in conformation with RFC 3596 Section 2.5
+* Windows UNC path name
 * Random generation for test purpose  
 
 
@@ -14,6 +15,8 @@
     ::ffff:c000:280  
     [user@box ~]$ ip6addr -o arpa -a 0:0::FFFF:192.0.2.128  
     0.8.2.0.0.0.0.c.f.f.f.f.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.IP6.ARPA.  
+    [user@box ~]$ ip6addr -o unc -a 2001:db8:85a3:8d3:1319:8a2e:370:7348
+    2001-db8-85a3-8d3-1319-8a2e-370-7348.ipv6-literal.net    
     [user@box ~]$ ip6addr -o full -a 0:0::FFFF:192.0.2.128  
     0000:0000:0000:0000:0000:ffff:c000:0280  
     [user@box ~]$ ip6addr -o random  
