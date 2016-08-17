@@ -13,10 +13,10 @@ import           System.IO              (stderr)
 import           Text.IPv6Addr
 
 data Input = Input
-    { output   :: String
-    , address  :: String
-    , quantity :: Int
-    , prefix   :: String
+    { output   :: !String
+    , address  :: !String
+    , quantity :: !Int
+    , prefix   :: !String
     } deriving (Show,Data,Typeable)
 
 ip6addrInput :: Input
@@ -31,7 +31,7 @@ ip6addrInput = Input
     , prefix = ""
       &= typ " <Prefix>"
       &= help "Set a prefix for random addresses generation"
-    } &= summary "ip6addr version 0.5.1.2 (C) Michel Boucey 2015-2016"
+    } &= summary "ip6addr version 0.5.1.2 (c) Michel Boucey 2015-2016"
       &= program "ip6addr"
       &= helpArg [name "h"]
       &= details [ "Examples:"
