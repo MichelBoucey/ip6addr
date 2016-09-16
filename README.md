@@ -1,4 +1,6 @@
-### ip6addr is a commandline tool written in Haskell that generates IPv6 address text representations
+# ip6addr [![Build Status](https://travis-ci.org/MichelBoucey/ip6addr.svg?branch=master)](https://travis-ci.org/MichelBoucey/ip6addr)
+
+A commandline tool that validates and generates IPv6 address text representations
 
 * Canonical, in conformation with RFC 5952 (default output)
 * Pure, i.e. rewriting IPv4 address if present
@@ -31,3 +33,4 @@
     1234:1a2b::362c:8295:f546:a43a  
     1234:1a2b::1121:ca16:ab5:688a  
 ```
+
