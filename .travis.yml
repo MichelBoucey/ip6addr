@@ -23,5 +23,5 @@ install:
   - stack setup --no-terminal
 
 script:
-  - stack build --no-terminal --skip-ghc-check --only-snapshot
+  - stack build --no-terminal --skip-ghc-check
 
