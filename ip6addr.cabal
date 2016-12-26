@@ -1,5 +1,5 @@
 name:                ip6addr
-version:             0.5.1.4
+version:             0.5.2
 synopsis:            Commandline tool to generate IPv6 address text representations
 description:         Commandline tool to generate IPv6 address text representations
 license:             BSD3
