@@ -13,7 +13,7 @@ import           System.IO              (stderr)
 import           Text.IPv6Addr
 
 version :: String
-version = "0.5.2"
+version = "1.0.0"
 
 data Input = Input
   { output   :: String
@@ -35,7 +35,7 @@ ip6addrInput = Input
   , prefix = ""
     &= typ " <Prefix>"
     &= help "Set a prefix for random addresses generation"
-  } &= summary ("ip6addr version " <> version <> " (c) Michel Boucey 2015-2017")
+  } &= summary ("ip6addr version " <> version <> " (c) Michel Boucey 2011-2018")
     &= program "ip6addr"
     &= helpArg [name "h"]
     &= details [ "Examples:"
@@ -60,35 +60,20 @@ main = do
         "unc"       -> out maybeUNC address id
         _           -> TIO.hPutStrLn stderr "See help" >> exitFailure
   where
-  putRandAddr p = do
-    r <- randIPv6AddrWithPrefix (if p == mempty then Nothing else Just (T.pack p))
-    case r of
-      Nothing -> TIO.putStrLn "Bad prefix"
-      Just a  -> TIO.putStrLn (fromIPv6Addr a)
-  out t i o =
-    if i /= mempty
-      then do
-        let p = T.pack i
-        case t p of
-          Nothing ->
-            TIO.hPutStrLn stderr ("'" <> p <> "' is not an IPv6 address")
-            >> exitFailure
-          Just a  -> TIO.putStrLn (o a) >> exitSuccess
+    putRandAddr p = do
+      r <- randIPv6AddrWithPrefix (if p == mempty then Nothing else Just (T.pack p))
+      case r of
+        Just a  -> TIO.putStrLn (fromIPv6Addr a)
+        Nothing -> TIO.putStrLn "Bad prefix"
+    out t i o =
+      if i /= mempty
+        then do
+          let p = T.pack i
+          case t p of
+            Nothing ->
+              TIO.hPutStrLn stderr ("'" <> p <> "' is not an IPv6 address") >> exitFailure
+            Just a  -> TIO.putStrLn (o a) >> exitSuccess
         else Prelude.putStrLn "See help" >> exitFailure
-  maybeUNC t =
-    maybe
-      Nothing
-      (\a -> Just (T.concatMap trans (fromIPv6Addr a) <> ".ipv6-literal.net"))
-      (maybePureIPv6Addr t)
-    where
-    trans ':' = "-"
-    trans c   = T.pack [c]
-  maybeIP6ARPA t =
-    maybe
-      Nothing
-      (\a -> Just (T.reverse (T.concatMap trans (fromIPv6Addr a)) <> "IP6.ARPA."))
-      (maybeFullIPv6Addr t)
-    where
-    trans ':' = T.empty
-    trans c   = "." <> T.pack [c]
+    maybeUNC t = toUNC <$> maybePureIPv6Addr t
+    maybeIP6ARPA t = toIP6ARPA <$> maybeFullIPv6Addr t
 
