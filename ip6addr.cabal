@@ -12,6 +12,8 @@ Category:            Network,Console
 build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
+ 
+Tested-With: GHC ==8.4.3 || ==8.6.5 || ==8.8.1
 
 Source-Repository head
   Type: git
@@ -24,7 +26,7 @@ executable ip6addr
                      , OverloadedStrings
   build-depends:       base             >= 4.8 && < 5
                      , cmdargs          >= 0.10.13 && < 0.11
-                     , IPv6Addr         >= 1.1.0 && < 1.2.0
+                     , IPv6Addr         >= 1.1.2 && < 1.2.0
                      , text             >= 1.2.2 && < 1.3
   default-language:    Haskell2010
   GHC-Options:         -Wall
