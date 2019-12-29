@@ -1,13 +1,13 @@
 name:                ip6addr
 version:             1.0.0
-synopsis:            Commandline tool to generate IPv6 address text representations
-description:         Commandline tool to generate IPv6 address text representations
+synopsis:            Commandline tool to deal with IPv6 address text representations
+description:         Commandline tool to validate, canonize and generate IPv6 address text representations
 license:             BSD3
 license-file:        LICENSE
 author:              Michel Boucey
 maintainer:          michel.boucey@cybervisible.fr
 homepage:            https://github.com/MichelBoucey/ip6addr
-Copyright:           Copyright (c) 2011-2018 - Michel Boucey
+Copyright:           Copyright (c) 2011-2019 - Michel Boucey
 Category:            Network,Console
 build-type:          Simple
 cabal-version:       >=1.10
