@@ -35,7 +35,7 @@ ip6addrInput = Input
   , prefix = ""
     &= typ " <Prefix>"
     &= help "Set a prefix for random addresses generation"
-  } &= summary ("ip6addr version " <> version <> " (c) Michel Boucey 2011-2018")
+  } &= summary ("ip6addr version " <> version <> " (c) Michel Boucey 2011-2021")
     &= program "ip6addr"
     &= helpArg [name "h"]
     &= details [ "Examples:"
@@ -76,4 +76,5 @@ main = do
         else Prelude.putStrLn "See help" >> exitFailure
     maybeUNC t = toUNC <$> maybePureIPv6Addr t
     maybeIP6ARPA t = toIP6ARPA <$> maybeFullIPv6Addr t
+    fromIPv6Addr (IPv6Addr a) = a
 
