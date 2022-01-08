@@ -13,7 +13,7 @@ import           System.IO              (stderr)
 import           Text.IPv6Addr
 
 version :: String
-version = "1.0.0"
+version = "1.0.4"
 
 data Input = Input
   { output   :: String
