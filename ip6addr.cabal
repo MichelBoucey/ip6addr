@@ -1,5 +1,5 @@
 name:                ip6addr
-version:             1.0.4
+version:             1.0.3
 synopsis:            Commandline tool to deal with IPv6 address text representations
 description:         Commandline tool to validate, canonize and generate IPv6 address text representations
 license:             BSD3
