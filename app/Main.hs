@@ -3,7 +3,6 @@
 {-# LANGUAGE RecordWildCards    #-}
 
 import           Control.Monad          (replicateM_)
-import           Data.Monoid            ((<>))
 import qualified Data.Text              as T
 import qualified Data.Text.IO           as TIO (hPutStrLn, putStrLn)
 import           System.Console.CmdArgs
