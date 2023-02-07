@@ -52,9 +52,9 @@ main = do
     then replicateM_ quantity (putRandAddr prefix) >> exitSuccess
     else
       case output of
-        "canonical" -> out maybeIPv6Addr address fromIPv6Addr
-        "pure"      -> out maybePureIPv6Addr address fromIPv6Addr
-        "full"      -> out maybeFullIPv6Addr address fromIPv6Addr
+        "canonical" -> out maybeIPv6Addr address unIPv6Addr
+        "pure"      -> out maybePureIPv6Addr address unIPv6Addr
+        "full"      -> out maybeFullIPv6Addr address unIPv6Addr
         "arpa"      -> out maybeIP6ARPA address id
         "unc"       -> out maybeUNC address id
         _           -> TIO.hPutStrLn stderr "See help" >> exitFailure
@@ -62,7 +62,7 @@ main = do
     putRandAddr p = do
       r <- randIPv6AddrWithPrefix (if p == mempty then Nothing else Just (T.pack p))
       case r of
-        Just a  -> TIO.putStrLn (fromIPv6Addr a)
+        Just a  -> TIO.putStrLn (unIPv6Addr a)
         Nothing -> TIO.putStrLn "Bad prefix"
     out t i o =
       if i /= mempty
@@ -75,5 +75,4 @@ main = do
         else Prelude.putStrLn "See help" >> exitFailure
     maybeUNC t = toUNC <$> maybePureIPv6Addr t
     maybeIP6ARPA t = toIP6ARPA <$> maybeFullIPv6Addr t
-    fromIPv6Addr (IPv6Addr a) = a
 
