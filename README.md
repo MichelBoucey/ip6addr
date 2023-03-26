@@ -1,4 +1,4 @@
-# ip6addr [![Build Status](https://travis-ci.org/MichelBoucey/ip6addr.svg?branch=master)](https://travis-ci.org/MichelBoucey/ip6addr)
+# ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg)
 
 A commandline tool that validates and generates IPv6 address text representations
 
