@@ -1,18 +1,18 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
+{-# LANGUAGE TemplateHaskell    #-}
 
 import           Control.Monad          (replicateM_)
 import qualified Data.Text              as T
 import qualified Data.Text.IO           as TIO (hPutStrLn, putStrLn)
+import           Data.Version           (showVersion)
+import           Paths_ip6addr          (version)
 import           System.Console.CmdArgs
 import           System.Exit
 import           System.IO              (stderr)
 
 import           Text.IPv6Addr
-
-version :: String
-version = "1.0.4"
 
 data Input = Input
   { output   :: String
@@ -34,7 +34,7 @@ ip6addrInput = Input
   , prefix = ""
     &= typ " <Prefix>"
     &= help "Set a prefix for random addresses generation"
-  } &= summary ("ip6addr version " <> version <> " (c) Michel Boucey 2011-2021")
+  } &= summary ("ip6addr " <> showVer <> " (c) Michel Boucey 2011-2023")
     &= program "ip6addr"
     &= helpArg [name "h"]
     &= details [ "Examples:"
@@ -44,6 +44,9 @@ ip6addrInput = Input
                , "  ip6addr -o random -q 10 -p 1234:abcd::"
                , ""
                ]
+
+showVer :: String
+showVer = "v" <> showVersion version
 
 main :: IO ()
 main = do
