@@ -1,7 +1,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE OverloadedStrings  #-}
 {-# LANGUAGE RecordWildCards    #-}
-{-# LANGUAGE TemplateHaskell    #-}
 
 import           Control.Monad          (replicateM_)
 import qualified Data.Text              as T
@@ -34,7 +33,7 @@ ip6addrInput = Input
   , prefix = ""
     &= typ " <Prefix>"
     &= help "Set a prefix for random addresses generation"
-  } &= summary ("ip6addr " <> showVer <> " (c) Michel Boucey 2011-2023")
+  } &= summary ("ip6addr " <> showVer <> " (c) Michel Boucey 2011-2024")
     &= program "ip6addr"
     &= helpArg [name "h"]
     &= details [ "Examples:"
