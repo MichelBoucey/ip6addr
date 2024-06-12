@@ -2,7 +2,7 @@
 mkDerivation {
   pname = "ip6addr";
   version = "1.0.4";
-  sha256 = "75a283c2d98ab23a14699afae570f13d8eb58a1175d6869902b90a4dce381039";
+  src = ./.;
   isLibrary = false;
   isExecutable = true;
   executableHaskellDepends = [ base cmdargs IPv6Addr text ];
