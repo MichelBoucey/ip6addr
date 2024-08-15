@@ -16,13 +16,15 @@
 ```
 ip6addr v2.0.0 (c) Michel Boucey 2011-2024
 
-Usage: ip6addr [(-c|--canonical) | (-n|--no-ipv4) | (-f|--full-length) |
+Usage: ip6addr [-v|--version]
+               [(-c|--canonical) | (-n|--no-ipv4) | (-f|--full-length) |
                  (-p|--ptr) | (-w|--windows-unc) | (-r|--random)]
                [-q|--quantity ARG] [-x|--prefix ARG] [<IPv6 address>]
 
   ip6addr
 
 Available options:
+  -v,--version             Show version
   -c,--canonical           In conformation with RFC 5952 (default)
   -n,--no-ipv4             Force the removal of IPv4 address if necessary
   -f,--full-length         Full IPv6 address length
