@@ -1,7 +1,7 @@
 { mkDerivation, base, cmdargs, IPv6Addr, lib, text }:
 mkDerivation {
   pname = "ip6addr";
-  version = "1.0.4";
+  version = "2.0.0";
   src = ./.;
   isLibrary = false;
   isExecutable = true;
