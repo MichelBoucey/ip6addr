@@ -29,6 +29,7 @@ data Options =
     , address  :: !String
     }
 
+showVer :: String
 showVer = "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024"
 
 main :: IO ()
@@ -82,7 +83,7 @@ parseOptions =
       (flag Canonical Canonical
         ( short 'c'
           <> long "canonical"
-          <> help "In conformation with RFC 5952 (default)"
+          <> help "In conformation with RFC 5952 (default output)"
         )
    <|>
       flag' NoIPv4
@@ -130,5 +131,5 @@ parseOptions =
           <> value ""
         )
    <*>
-      argument str (metavar "<IPv6 address>" <> value "")
+      argument str (metavar "IPv6 address" <> value "")
 
