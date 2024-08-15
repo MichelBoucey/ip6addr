@@ -1,4 +1,4 @@
-<H1>ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg)</H1>
+# ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg)
 
 ## 1. Goal
 
