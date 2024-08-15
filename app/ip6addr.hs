@@ -22,22 +22,28 @@ data Output
 
 data Options =
   Options
-    { output   :: Output
-    , quantity :: Int
-    , prefix   :: String
-    , address  :: String
+    { showver  :: !Bool
+    , output   :: !Output
+    , quantity :: !Int
+    , prefix   :: !String
+    , address  :: !String
     }
+
+showVer = "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024"
 
 main :: IO ()
 main = do
   Options{..} <- execParser opts
-  case output of
-    Canonical  -> out maybeIPv6Addr address unIPv6Addr
-    NoIPv4     -> out maybePureIPv6Addr address unIPv6Addr
-    FullLength -> out maybeFullIPv6Addr address unIPv6Addr
-    PTR        -> out maybeIP6ARPA address id
-    UNC        -> out maybeUNC address id
-    Random     -> replicateM_ quantity (putRandAddr prefix) >> exitSuccess
+  if showver
+    then putStrLn showVer >> exitFailure
+    else
+      case output of
+        Canonical  -> out maybeIPv6Addr address unIPv6Addr
+        NoIPv4     -> out maybePureIPv6Addr address unIPv6Addr
+        FullLength -> out maybeFullIPv6Addr address unIPv6Addr
+        PTR        -> out maybeIP6ARPA address id
+        UNC        -> out maybeUNC address id
+        Random     -> replicateM_ quantity (putRandAddr prefix) >> exitSuccess
   where
     putRandAddr p = do
       r <- randIPv6AddrWithPrefix (if p == mempty then Nothing else Just (T.pack p))
@@ -60,13 +66,19 @@ opts :: ParserInfo Options
 opts = info (parseOptions <**> helper)
   ( fullDesc
     <> progDesc "ip6addr"
-    <> header ( "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024")
+    <> header (showVer)
   )
 
 parseOptions :: Parser Options
 parseOptions =
   Options
     <$>
+      switch
+        ( short 'v'
+          <> long "version"
+          <> help "Show version"
+        )
+    <*>
       (flag Canonical Canonical
         ( short 'c'
           <> long "canonical"
