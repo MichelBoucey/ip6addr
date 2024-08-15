@@ -2,7 +2,7 @@
 
 ## 1. Goal
 
-`ip6addr` is a commandline tool that validates and generates IPv6 address text representations, based upon (the library IPv6Addr)[https://github.com/MichelBoucey/IPv6Addr] :
+`ip6addr` is a commandline tool that validates and generates IPv6 address text representations, based upon [the library IPv6Addr](https://github.com/MichelBoucey/IPv6Addr) :
 
 * Canonical, in conformation with RFC 5952 (default output)
 * Pure, i.e. rewriting IPv4 address if present
