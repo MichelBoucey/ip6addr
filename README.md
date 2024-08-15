@@ -4,10 +4,10 @@
 
 `ip6addr` is a commandline tool that validates and generates IPv6 address text representations, based upon [the library IPv6Addr](https://github.com/MichelBoucey/IPv6Addr) :
 
-* Canonical, in conformation with RFC 5952 (default output)
-* Pure, i.e. rewriting IPv4 address if present
+* Canonical, in conformation with [RFC 5952](https://www.rfc-editor.org/rfc/rfc5952) (default output)
+* Pure, *i.e.* force the rewriting of IPv4 address if present
 * Full length
-* Reverse lookup domain name, in conformation with RFC 3596 Section 2.5
+* Reverse lookup domain name, in conformation with [RFC 3596 Section 2.5](https://www.rfc-editor.org/rfc/rfc3596#section-2.5)
 * Windows UNC path name
 * Random generation for test purpose  
 
