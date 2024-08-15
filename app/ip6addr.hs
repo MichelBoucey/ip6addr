@@ -60,7 +60,7 @@ opts :: ParserInfo Options
 opts = info (parseOptions <**> helper)
   ( fullDesc
     <> progDesc "ip6addr"
-    <> header ( "ip6addr " <> showVer <> " (c) Michel Boucey 2011-2024")
+    <> header ( "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024")
   )
 
 parseOptions :: Parser Options
@@ -111,15 +111,12 @@ parseOptions =
           <> value 1
         )
    <*>
-      option auto
-        ( short 's'
+      option str
+        ( short 'x'
           <> long "prefix"
-          <> help "Set a prefix for random addresses generation"
+          <> help "Set a prefix for random addresses to generate"
           <> value ""
         )
    <*>
       argument str (metavar "<IPv6 address>" <> value "")
-
-showVer :: String
-showVer = "v" <> showVersion version
 
