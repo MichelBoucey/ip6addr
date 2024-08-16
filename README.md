@@ -37,6 +37,8 @@ Available options:
   -h,--help                Show this help text
 ```
 
+*N.B.* : In version 2, flags and arguments have changed from version 1, but the features are identical.
+
 ## 3. Examples
 
 ```bash
