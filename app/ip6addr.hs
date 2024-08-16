@@ -34,7 +34,7 @@ main = do
       case t of
         Right a                   -> TIO.putStrLn (unIPv6Addr $ fromJust a)
         Left (_ :: SomeException) ->
-          TIO.putStrLn (p' <> " is an invalid prefix") >> exitFailure
+          TIO.putStrLn ("'" <> p' <> "' is an invalid prefix") >> exitFailure
     out t i o =
       if i /= mempty
         then do
@@ -72,7 +72,7 @@ opts :: ParserInfo Options
 opts = info (parseOptions <**> helper)
   ( fullDesc
     <> progDesc "ip6addr"
-    <> header (showVer)
+    <> header showVer
   )
 
 parseOptions :: Parser Options
