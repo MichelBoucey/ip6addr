@@ -25,7 +25,7 @@ Usage: ip6addr [-v|--version]
 
 Available options:
   -v,--version             Show version
-  -c,--canonical           In conformation with RFC 5952 (default)
+  -c,--canonical           In conformation with RFC 5952 (default output)
   -n,--no-ipv4             Force the removal of IPv4 address if necessary
   -f,--full-length         Full IPv6 address length
   -p,--ptr                 PTR reverse mapping
