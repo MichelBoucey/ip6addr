@@ -94,7 +94,7 @@ parseOptions =
       flag' NoIPv4
         ( short 'n'
           <> long "no-ipv4"
-          <> help "Force the removal of IPv4 address if necessary"
+          <> help "Force the rewriting of IPv4 address if necessary to get a pure IPv6 address"
         )
    <|>
       flag' FullLength
