@@ -6,7 +6,7 @@ import           Control.Exception
 import           Control.Monad       (replicateM_)
 import           Data.Maybe
 import qualified Data.Text           as T (pack)
-import qualified Data.Text.IO        as TIO (hPutStrLn, putStrLn)
+import qualified Data.Text.IO        as TIO (hPutStrLn, putStr, putStrLn)
 import           Data.Version        (showVersion)
 import           Options.Applicative
 import           Paths_ip6addr       (version)
@@ -21,31 +21,32 @@ main = do
     then putStrLn showVer >> exitFailure
     else
       case output of
-        Canonical  -> out maybeIPv6Addr address unIPv6Addr
-        NoIPv4     -> out maybePureIPv6Addr address unIPv6Addr
-        FullLength -> out maybeFullIPv6Addr address unIPv6Addr
-        PTR        -> out maybeIP6ARPA address id
-        UNC        -> out maybeUNC address id
-        Random     -> replicateM_ quantity (putRandAddr prefix) >> exitSuccess
+        Canonical  -> out noNewline maybeIPv6Addr address unIPv6Addr
+        NoIPv4     -> out noNewline maybePureIPv6Addr address unIPv6Addr
+        FullLength -> out noNewline maybeFullIPv6Addr address unIPv6Addr
+        PTR        -> out noNewline maybeIP6ARPA address id
+        UNC        -> out noNewline maybeUNC address id
+        Random     -> replicateM_ quantity (putRandAddr noNewline prefix) >> exitSuccess
   where
-    putRandAddr p = do
+    putRandAddr n p = do
       let p' = T.pack p
       t <- try $ randIPv6AddrWithPrefix (if p == mempty then Nothing else Just p')
       case t of
-        Right a                   -> TIO.putStrLn (unIPv6Addr $ fromJust a)
+        Right a                   -> put n (unIPv6Addr $ fromJust a)
         Left (_ :: SomeException) ->
           TIO.putStrLn ("'" <> p' <> "' is an invalid prefix") >> exitFailure
-    out t i o =
+    out n t i o =
       if i /= mempty
         then do
           let p = T.pack i
           case t p of
             Nothing ->
               TIO.hPutStrLn stderr ("'" <> p <> "' is not an IPv6 address") >> exitFailure
-            Just a  -> TIO.putStrLn (o a) >> exitSuccess
+            Just a  -> put n (o a) >> exitSuccess
         else Prelude.putStrLn "See help" >> exitFailure
     maybeUNC t = toUNC <$> maybePureIPv6Addr t
     maybeIP6ARPA t = toIP6ARPA <$> maybeFullIPv6Addr t
+    put n = if n then TIO.putStr else TIO.putStrLn
 
 showVer :: String
 showVer = "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024"
@@ -61,11 +62,12 @@ data Output
 
 data Options =
   Options
-    { showver  :: !Bool
-    , output   :: !Output
-    , quantity :: !Int
-    , prefix   :: !String
-    , address  :: !String
+    { showver   :: !Bool
+    , output    :: !Output
+    , quantity  :: !Int
+    , prefix    :: !String
+    , noNewline :: !Bool
+    , address   :: !String
     }
 
 opts :: ParserInfo Options
@@ -130,11 +132,16 @@ parseOptions =
         )
    <*>
       option str
-        ( short 'x'
+        ( short 's'
           <> long "prefix"
           <> help "Set a prefix for random addresses to generate"
           <> value ""
         )
+   <*>
+      flag False True
+        ( short 'd'
+          <> long "no-newline"
+          <> help "Do not output trailing newlines" )
    <*>
       argument str (metavar "IPv6 address" <> value "")
 

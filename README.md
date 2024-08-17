@@ -19,7 +19,8 @@ ip6addr v2.0.0 (c) Michel Boucey 2011-2024
 Usage: ip6addr [-v|--version]
                [(-c|--canonical) | (-n|--no-ipv4) | (-f|--full-length) |
                  (-p|--ptr) | (-w|--windows-unc) | (-r|--random)]
-               [-q|--quantity ARG] [-x|--prefix ARG] [<IPv6 address>]
+               [-q|--quantity ARG] [-x|--prefix ARG] [-d|--no-newline]
+               [IPv6 address]
 
   ip6addr
 
@@ -34,6 +35,7 @@ Available options:
   -r,--random              Random generation
   -q,--quantity ARG        Amount of random addresses to generate
   -x,--prefix ARG          Set a prefix for random addresses to generate
+  -d,--no-newline          Do not output trailing newlines
   -h,--help                Show this help text
 ```
 
