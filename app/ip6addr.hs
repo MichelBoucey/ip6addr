@@ -14,11 +14,16 @@ import           System.Exit
 import           System.IO           (stderr)
 import           Text.IPv6Addr
 
+showVer :: String
+showVer = "ip6addr v"
+       <> showVersion version
+       <> " (c) Michel Boucey 2011-2024"
+
 main :: IO ()
 main = do
   Options{..} <- execParser opts
   if showver
-    then putStrLn showVer >> exitFailure
+    then failMsg $ T.pack showVer
     else
       case output of
         Canonical  -> out noNewline maybeIPv6Addr address unIPv6Addr
@@ -33,23 +38,19 @@ main = do
       t <- try $ randIPv6AddrWithPrefix (if p == mempty then Nothing else Just p')
       case t of
         Right a                   -> put n (unIPv6Addr $ fromJust a)
-        Left (_ :: SomeException) ->
-          TIO.putStrLn ("'" <> p' <> "' is an invalid prefix") >> exitFailure
+        Left (_ :: SomeException) -> failMsg $ "'" <> p' <> "' is an invalid prefix"
     out n t i o =
       if i /= mempty
         then do
           let p = T.pack i
           case t p of
-            Nothing ->
-              TIO.hPutStrLn stderr ("'" <> p <> "' is not an IPv6 address") >> exitFailure
             Just a  -> put n (o a) >> exitSuccess
-        else Prelude.putStrLn "See help" >> exitFailure
+            Nothing -> failMsg $ "'" <> p <> "' is not an IPv6 address"
+        else failMsg "See --help"
     maybeUNC t = toUNC <$> maybePureIPv6Addr t
     maybeIP6ARPA t = toIP6ARPA <$> maybeFullIPv6Addr t
     put n = if n then TIO.putStr else TIO.putStrLn
-
-showVer :: String
-showVer = "ip6addr v" <> showVersion version <> " (c) Michel Boucey 2011-2024"
+    failMsg m = TIO.hPutStrLn stderr m >> exitFailure
 
 data Output
   = Canonical
