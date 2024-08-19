@@ -27,8 +27,8 @@ Usage: ip6addr [-v|--version]
 Available options:
   -v,--version             Show version
   -c,--canonical           In conformation with RFC 5952 (default output)
-  -n,--no-ipv4             Force the rewriting of IPv4 address if necessary to
-                           get a pure IPv6 address
+  -n,--no-ipv4             Force the rewriting of the IPv4 address if present to
+                           get a pure IPv6 address made of nibbles only
   -f,--full-length         Full IPv6 address length
   -p,--ptr                 PTR reverse mapping
   -w,--windows-unc         Windows UNC path name

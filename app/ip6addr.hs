@@ -2,9 +2,9 @@
 {-# LANGUAGE RecordWildCards     #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-import           Control.Exception
+import           Control.Exception   (try, SomeException)
 import           Control.Monad       (replicateM_)
-import           Data.Maybe
+import           Data.Maybe          (fromJust)
 import qualified Data.Text           as T (pack)
 import qualified Data.Text.IO        as TIO (hPutStrLn, putStr, putStrLn)
 import           Data.Version        (showVersion)
@@ -22,8 +22,7 @@ showVer = "ip6addr v"
 main :: IO ()
 main = do
   Options{..} <- execParser opts
-  if showver
-    then failMsg $ T.pack showVer
+  if showver then failMsg $ T.pack showVer
     else
       case output of
         Canonical  -> out noNewline maybeIPv6Addr address unIPv6Addr
@@ -97,7 +96,8 @@ parseOptions =
       flag' NoIPv4
         ( short 'n'
           <> long "no-ipv4"
-          <> help "Force the rewriting of IPv4 address if necessary to get a pure IPv6 address"
+          <> help "Force the rewriting of the IPv4 address if present\
+                   \ to get a pure IPv6 address made of nibbles only"
         )
    <|>
       flag' FullLength
