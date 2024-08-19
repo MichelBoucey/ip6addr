@@ -2,7 +2,7 @@
 {-# LANGUAGE RecordWildCards     #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-import           Control.Exception   (try, SomeException)
+import           Control.Exception   (SomeException, try)
 import           Control.Monad       (replicateM_)
 import           Data.Maybe          (fromJust)
 import qualified Data.Text           as T (pack)
