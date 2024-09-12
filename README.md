@@ -1,4 +1,4 @@
-<h1>ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg) [![Hackage](https://img.shields.io/hackage/v/ip6addr.svg)](https://hackage.haskell.org/package/ip6addr)</h1>
+# ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg) [![Hackage](https://img.shields.io/hackage/v/ip6addr.svg)](https://hackage.haskell.org/package/ip6addr)
 
 ## 1. Purpose
 
