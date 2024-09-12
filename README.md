@@ -21,6 +21,14 @@ cabal install ip6addr
 
 ### 2.2. With Nix
 
+#### 2.2.1. From sources
+
+```
+nix-build
+```
+
+#### 2.2.2. From Nix Packages collection
+
 ```
 nix profile install nixpkgs#haskellPackages.ip6addr
 ```
