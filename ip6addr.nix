@@ -5,6 +5,7 @@ mkDerivation {
   src = ./.;
   isLibrary = false;
   isExecutable = true;
+  doHaddock = false;
   executableHaskellDepends = [
     base IPv6Addr optparse-applicative text
   ];
