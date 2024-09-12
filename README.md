@@ -1,6 +1,6 @@
-# ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg) [![Hackage](https://img.shields.io/hackage/v/ip6addr.svg)](https://hackage.haskell.org/package/ip6addr)
+<h1>ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg) [![Hackage](https://img.shields.io/hackage/v/ip6addr.svg)](https://hackage.haskell.org/package/ip6addr)</h1>
 
-## 1. Goal
+## 1. Purpose
 
 `ip6addr` is a commandline tool that validates and generates IPv6 address text representations, based upon [the library IPv6Addr](https://github.com/MichelBoucey/IPv6Addr) :
 
@@ -11,7 +11,21 @@
 * Windows UNC path name
 * Random generation for test purpose  
 
-## 2. Usage
+## 2. Install
+
+### 2.1. With Cabal
+
+```
+cabal install ip6addr
+```
+
+### 2.2. With Nix
+
+```
+nix profile install nixpkgs#haskellPackages.ip6addr
+```
+
+## 3. Usage
 
 ```
 ip6addr v2.0.0 (c) Michel Boucey 2011-2024
@@ -41,7 +55,7 @@ Available options:
 
 *N.B.* : In version 2, flags and arguments have changed from version 1, but the main features are identical.
 
-## 3. Examples
+## 4. Examples
 
 ```bash
     [user@box ~]$ ip6addr 0:0::FFFF:192.0.2.128  
