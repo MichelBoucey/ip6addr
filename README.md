@@ -1,5 +1,7 @@
 # ip6addr ![CI](https://github.com/MichelBoucey/ip6addr/actions/workflows/haskell-ci.yml/badge.svg) [![Hackage](https://img.shields.io/hackage/v/ip6addr.svg)](https://hackage.haskell.org/package/ip6addr)
 
+# OK
+
 ## 1. Purpose
 
 `ip6addr` is a commandline tool that validates and generates IPv6 address text representations, based upon [the library IPv6Addr](https://github.com/MichelBoucey/IPv6Addr) :

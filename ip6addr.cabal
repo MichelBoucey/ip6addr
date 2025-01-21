@@ -7,13 +7,22 @@ license-file:        LICENSE
 author:              Michel Boucey
 maintainer:          michel.boucey@gmail.com
 homepage:            https://github.com/MichelBoucey/ip6addr
-Copyright:           Copyright (c) 2011-2024 - Michel Boucey
+Copyright:           Copyright (c) 2011-2025 - Michel Boucey
 Category:            Network,Console
 build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
  
-Tested-With: GHC ==8.8.4 || ==8.10.7 || ==9.0.2 || ==9.2.8 || ==9.4.8 || ==9.6.3 || ==9.8.2 || ==9.10.1
+Tested-With:
+  GHC ==8.8.4
+   || ==8.10.7
+   || ==9.0.2
+   || ==9.2.8
+   || ==9.4.8
+   || ==9.6.5
+   || ==9.8.2
+   || ==9.10.1
+   || ==9.12.1
 
 Source-Repository head
   Type: git
@@ -30,5 +39,5 @@ executable ip6addr
                      , optparse-applicative >= 0.14 && < 0.19
                      , text                 >=1.1 && < 2.2
   default-language:    Haskell2010
-  GHC-Options:         -Wall
+  GHC-Options:         -Wall -O2
 
