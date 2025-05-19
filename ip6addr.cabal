@@ -8,7 +8,7 @@ author:              Michel Boucey
 maintainer:          michel.boucey@gmail.com
 homepage:            https://github.com/MichelBoucey/ip6addr
 Copyright:           Copyright (c) 2011-2025 - Michel Boucey
-Category:            Network,Console
+Category:            Network, Cli
 build-type:          Simple
 cabal-version:       >=1.10
 extra-source-files:  README.md
