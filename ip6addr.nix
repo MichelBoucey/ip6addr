@@ -1,7 +1,7 @@
 { mkDerivation, base, IPv6Addr, lib, optparse-applicative, text }:
 mkDerivation {
   pname = "ip6addr";
-  version = "2.0.0";
+  version = "2.0.0.1";
   src = ./.;
   isLibrary = false;
   isExecutable = true;
