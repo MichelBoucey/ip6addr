@@ -17,7 +17,7 @@ import           Text.IPv6Addr
 showVer :: String
 showVer = "ip6addr v"
        <> showVersion version
-       <> " (c) Michel Boucey 2011-2025"
+       <> " (c) Michel Boucey 2011-2026"
 
 main :: IO ()
 main = do
