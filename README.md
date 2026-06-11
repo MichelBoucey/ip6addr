@@ -11,32 +11,10 @@
 * Windows UNC path name
 * Random generation for test purpose  
 
-## 2. Install
-
-### 2.1. With Cabal
+## 2. Usage
 
 ```
-cabal install ip6addr
-```
-
-### 2.2. With Nix
-
-#### 2.2.1. From sources
-
-```
-nix-build
-```
-
-#### 2.2.2. From Nix Packages collection
-
-```
-nix profile install nixpkgs#haskellPackages.ip6addr
-```
-
-## 3. Usage
-
-```
-ip6addr v2.0.0 (c) Michel Boucey 2011-2024
+ip6addr v2.0.1.0 (c) Michel Boucey 2026
 
 Usage: ip6addr [-v|--version]
                [(-c|--canonical) | (-n|--no-ipv4) | (-f|--full-length) |
@@ -61,9 +39,7 @@ Available options:
   -h,--help                Show this help text
 ```
 
-*N.B.* : In version 2, flags and arguments have changed from version 1, but the main features are identical.
-
-## 4. Examples
+## 3. Examples
 
 ```bash
     [user@box ~]$ ip6addr 0:0::FFFF:192.0.2.128  
